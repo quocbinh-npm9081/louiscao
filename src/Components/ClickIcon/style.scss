@@ -1,0 +1,11 @@
+@import "../../style/variables";
+.clickIcon {
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
