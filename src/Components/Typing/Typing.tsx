@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import Typed, { TypedOptions } from "typed.js";
-
+import "./style.scss";
 const Typing = () => {
   const typedRef = useRef<HTMLSpanElement>(null);
 
@@ -22,7 +22,7 @@ const Typing = () => {
   }, []);
   return (
     <div>
-      <div className="header-container">
+      <div className="typing-container">
         <div className="row space-between">
           <div className="logo">
             <Link to="/">

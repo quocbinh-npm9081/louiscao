@@ -3,7 +3,9 @@ import lowQualityImage from "../assets/main2.jpg";
 import ScrollForMore from "../Components/ScrollForMore/ScrollForMore";
 import MonoMusic from "../assets/mp3/Waiting For You Album.mp3";
 import { motion, useScroll, useTransform } from "framer-motion";
-import Typing from "../Components/Typing";
+import Typing from "../Components/Typing/Typing";
+import Loader from "../Components/Loader/Loader";
+import Banner from "../Components/Banner/Banner";
 //Components
 
 interface IModelProps {
@@ -48,6 +50,8 @@ const Model: React.FC<IModelProps> = ({ imageDetails }) => {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.4]);
   const [isPlay, setIsPlay] = useState<Boolean>(true);
+  const [bannerLoading, setBannerLoading] = useState<Boolean>(true);
+
   useEffect(() => {
     if (!isCanScroll) {
       document.querySelector("body")?.classList.add("no-scroll");
@@ -174,6 +178,36 @@ const Model: React.FC<IModelProps> = ({ imageDetails }) => {
           </div>
         </div>
       </div>
+      <div
+        style={{
+          position: "absolute",
+          backgroundColor: "#ffffff",
+        }}
+      >
+        {bannerLoading ? (
+          <Loader setLoading={setBannerLoading}></Loader>
+        ) : (
+          <>
+            <Banner />
+            {!bannerLoading && (
+              <div className="transition-image final">
+                <motion.img
+                  layoutId="main-image-1"
+                  src={`${
+                    import.meta.env.VITE_REACT_APP_URL_IMAGE_PATH
+                  }/image-2.jpg
+                  `}
+                  transition={{
+                    ease: [0.6, 0.01, -0.05, 0.9],
+                    duration: 0.9,
+                  }}
+                />
+              </div>
+            )}
+          </>
+        )}
+      </div>
+
       <audio src={MonoMusic} ref={player} controls style={{ opacity: 0 }} />
     </motion.div>
   );
